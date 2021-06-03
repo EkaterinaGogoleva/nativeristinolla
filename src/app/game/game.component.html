@@ -1,0 +1,40 @@
+<StackLayout orientation="vertical">
+  <Label class="bigLabel" text="Ristinolla"></Label>
+
+  <Button text="Uusi peli" class="btn btn-primary" (tap)="newGame()"></Button>
+
+  <Button text="Nollaa pisteet" class="btn btn-primary" (tap)="nullifyScores()">
+  </Button>
+
+  <Label
+    *ngIf="moves < 9 && !winner"
+    class="smallLabel"
+    text="Vuorossa pelaaja: {{ player }}"
+  ></Label>
+
+  <Label
+    *ngIf="winner"
+    class="smallLabel"
+    text="Pelaaja {{ winner }} voitti pelin!"
+  ></Label>
+
+  <Label *ngIf="tasapeli" class="smallLabel" text="Peli päättyi tasan"></Label>
+
+  <WrapLayout orientation="horizontal" width="220" height="220" itemWidth="70">
+    <app-square
+      *ngFor="let val of squares; let i = index"
+      [line]="line"
+      [value]="val"
+      [index]="i"
+      (tap)="makeMove(i)"
+    >
+    </app-square>
+  </WrapLayout>
+
+ 
+
+  <Label
+    class="smallLabel"
+    text="X - 0 tilanne {{ scores.X }} - {{ scores.O }}"
+  ></Label>
+</StackLayout>
